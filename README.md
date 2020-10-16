@@ -8,19 +8,19 @@ The recipes are ordered by the importance of your veggie in the recipe, and usua
 You can click on the title to get the link for the recipe!
 
 To build this app we used:
-Flask
-Python
-Javascript
-Html
-CSS
-SQLite
+- Flask
+- Python
+- Javascript
+- Html
+- CSS
+- SQLite
 
 Future Updates:
-Full Google search instead of a built-in DB
-Highlighting the veggies of your input on the recipes veggies list
-Error messages
-New design
-Save favorite recipes
+- Full Google search instead of a built-in DB
+- Highlighting the veggies of your input on the recipes veggies list
+- Error messages
+- New design
+- Save favorite recipes
 
 This is Amit Shahar’s and Itan Brill's first programming project.
 Please contact us for any questions or suggestions. 
