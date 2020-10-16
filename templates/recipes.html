@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css', v=0.01) }}">
+    <title>Recipes</title>
+</head>
+
+<body>
+<div class="header">
+    <form action="/" method="GET" id="form_back">
+        <button id="back" type="submit" name="back">Back</button>
+    </form>
+    <h1> Recipes </h1>
+</div>
+
+<div id="recipes_info">
+    <h3> Here are some salad ideas with:</h3>
+    {% set veggies_string = ', '.join(veggies_input) %}
+    <h5> {{ veggies_string }} </h5>
+</div>
+<div id="recipes_table">
+    <!--When there is no veggie in the table - do not show the table at all-->
+    {% if veggies_input == [] %}
+        <script>
+            document.getElementById("recipes_table").style.visibility = "hidden";
+        </script>
+    {% endif %}
+    <table>
+        <!-- Loop through the relevant recipes list-->
+        {% for recipe in relevant_recipes %}
+
+            <tr>
+                <td id="recipe_name"><a href="{{ recipe[1][2] }}"> {{ recipe[1][1] }}</a>
+                    <br>
+                    <p>{{ 'Including: ' + recipe[1][3][2:-1].lower() }}</p></td>
+
+                {% set recipe_name = recipe[1][1].replace(" ","_") %}
+
+                <td id="recipe_photo"> <img src="/static/photos/{{ recipe_name }}.png" alt="name" width=150 height=150 border=1></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="footer">
+    <p>Amit & Itan 2020</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Salad Maker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css', v=0.01) }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="header">
+   <h1>Salad Maker</h1>
+</div>
+<div class="info">
+    <h3>Get some creative salads ideas for the veggies in your fridge!</h3>
+</div>
+
+<div class="veg_form">
+    <!--Autocomplete form: enter veggies-->
+    <form autocomplete="off" action="/" method="POST">
+        <div class="autocomplete">
+            <input id="content" name="content" type="text" placeholder="Type your veggie">
+            <input id="submit_add_veggie" type="submit" value="Add your veggie">
+        </div>
+    </form>
+</div>
+<!--Javascript function for the auto-correction of veggies according to the DB-->
+<script>
+
+    function autocomplete(inp, arr) {
+
+        inp.addEventListener("input", function (e) {
+            var a, b, i, val = this.value;
+
+            closeAllLists();
+            if (!val) {
+                return false;
+            }
+            currentFocus = -1;
+
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+
+            this.parentNode.appendChild(a);
+            for (i = 0; i < arr.length; i++) {
+                /* Create var for chars identification*/
+                var text_veggie = arr[i];
+                var val_with_capital = val.charAt(0).toUpperCase() + val.slice(1);
+
+                /* If the typed char is the first letter of a veggie */
+                if ((arr[i].includes(val_with_capital)) || (arr[i].includes(' ' + val.toLowerCase()))) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold */
+                    if (arr[i].includes(val_with_capital))
+                        b.innerHTML += text_veggie.replace(val_with_capital, '<b>' + val_with_capital + '</b>');
+                    else if (arr[i].includes(' ' + val.toLowerCase()))
+                        b.innerHTML += text_veggie.replace(val, '<b>' + val.toLowerCase() + '</b>');
+
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function (e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                    //and then simulate a click on the "submit" (add veggie) bottom
+                    document.getElementById('submit_add_veggie').click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+
+    var veggies_db = [];
+    $.get("/get_veggies_list", function (data) {
+        veggies_db = data.list
+        //change to real address later
+        // initiate the autocomplete function on the "content" element, and pass along the veggies db:
+    }).done(function () {
+        autocomplete(document.getElementById("content"), veggies_db)
+    });
+
+</script>
+
+<!-- Table of veggies-->
+<br>
+<div id="veg_table">
+    <!--When there is no veggie in the table - do not show the table at all-->
+    {% if veggies_input == [] %}
+        <script>
+            document.getElementById("veg_table").style.visibility = "hidden";
+
+        </script>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>Veggies</th>
+            <th>
+                <div id="delete_all">
+                    {% if veggies_input == [] %}
+                        <script>document.getElementById("delete_all").style.visibility = "hidden";</script>
+                    {% endif %}
+                    <form action="/delete_all_veggies" method="POST">
+                        <button id="delete_all_veggies" type="submit" name="delete">Delete All Veggies</button>
+                    </form>
+                </div>
+            </th>
+        </tr>
+        <!-- Loop through the client input and put each veggie in the table-->
+        {% for veg in veggies_input %}
+            <tr>
+                <td>{{ veg }}</td>
+                <td>
+                    <a href="/delete/{{ veg }}" id="delete_one">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>
+<div id="send" class="send">
+    {% if veggies_input == [] %}
+        <script>document.getElementById("send").style.visibility = "hidden";</script>
+    {% endif %}
+    <form action="/send_veggies_input" method="POST">
+        <button id="submit_all_veggies" type="submit" name="send">Find me some recipes!</button>
+    </form>
+</div>
+
+<div class="footer">
+    <p>Amit & Itan 2020</p>
+</div>
+</body>
+</html>

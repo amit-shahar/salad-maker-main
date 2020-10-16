@@ -1,0 +1,442 @@
+html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    background-color: #f9ffed;
+}
+
+table, th, td {
+    width:40%;
+    border-bottom: 1px solid darkseagreen;
+    border-collapse: collapse;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 26px;
+    color: #004d00;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+
+}
+
+th, td {
+    padding: 15px;
+}
+
+th{
+    text-align: left;
+    font-size: 30px;
+    color: #2E7300;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img{
+    width: 450px;
+    height: 350px;
+    object-fit: cover;
+}
+
+button{
+    background-color: #f4f8f1;
+    color: #5a833d;
+    border: 1px solid #8db66f;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana, Geneva, sans-serif;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-size: 15px;
+}
+
+button:hover{
+    background-color: #f4f8f1;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2), 0 3px 3px rgba(0,0,0,0.2);
+    color:#8db66f;
+    border: 1px solid #7c8973;
+
+}
+
+/* Links */
+a:link{
+    color: #004d00;
+    text-decoration: none;
+}
+
+a:visited{
+    color: #004d00;;
+    text-decoration: none;
+
+}
+
+a:hover{
+    color: #8db66f;
+}
+
+a:active{
+    color: #004d00;;
+}
+
+
+/* Classes */
+
+/*the container must be positioned relative:*/
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    width: 100%;
+}
+
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type=text] {
+    background-color: #f1f1f1;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+input[type=submit] {
+    background-color: #97ce8e;
+    color: #fff;
+    cursor: pointer;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: #61925a !important;
+    color: #ffffff;
+}
+
+h1{
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 155px;
+    color: #78B251;
+    margin: 0;
+}
+
+h3{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #61925a;
+    text-align: center;
+    font-size: 40px;
+}
+
+h5{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    text-align: center;
+    font-size: 30px;
+    color: #004d00;
+}
+
+.header{
+    background-color: #E4EFDC;
+    display: -webkit-flex;
+    top: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: baseline;
+
+}
+
+
+.veg_form{
+    margin: auto;
+    max-width: 70%;
+    object-fit: cover;
+
+}
+
+.send{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer{
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+/*ID*/
+
+#contentautocomplete-list{
+    width:73%;
+}
+
+#submit_all_veggies{
+    background-color: #97ce8e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-top: 15%;
+}
+
+#submit_add_veggie{
+    display: inline;
+    width: 25%;
+}
+
+#submit_add_veggie:hover{
+    height: 100%;
+    border: 1px solid #7c8973;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2), 0 3px 3px rgba(0,0,0,0.2);
+}
+
+#content{
+    display: inline;
+    float: left;
+    width: 73%;
+
+}
+
+#veg_table{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete_one{
+    font-size: 16px;
+
+}
+
+#back{
+    left: 2px;
+    top: 2px;
+}
+
+#form_back{
+    width: 10%;
+    position: absolute;
+    left:10px;
+    top: 10px;
+
+}
+
+#h1_recipes{
+    width: 87%;
+}
+
+#recipes_info p{
+    text-align: center;
+    font-size: 18px;
+    color: #2E7300;
+}
+
+#recipes_table{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+#recipes_table table{
+    width:100%;
+}
+
+#recipe_name p{
+    color: #7c8973;
+}
+
+#recipe_name a{
+    font-size: 60px;
+    font-weight: bold;
+
+}
+
+#recipe_photo{
+    text-align: center;
+
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 1200px) {
+    /* For tablets: */
+    h1 {
+        font-size: 80px;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    #submit_add_veggie {
+        font-size: 12px;
+    }
+
+    #ingredients {
+        font-size: 20px;
+    }
+
+    #recipes_table{
+        width: 95%;
+    }
+
+    #recipe_name p{
+        font-size: 80%;
+    }
+
+    #recipe_name a {
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    img{
+        width: 350px;
+        height: 260px;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width:764px) {
+    /* for phones */
+    body{
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    input{
+        padding-left: 5px;
+    }
+    .header{
+        width: 100%;
+        align-items: baseline;
+    }
+
+
+    h1 {
+        font-size: 44px;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    h5 {
+        font-size: 16px;
+    }
+
+    a {
+        font-size: 15px;
+    }
+
+    .veg_form {
+        max-width: 95%;
+    }
+
+    #ingredients {
+        font-size: 13px;
+    }
+
+    #content {
+        font-size: 12px;
+        width: 69%;
+    }
+
+    #form_back{
+        top:2px;
+        left: 4px;
+    }
+
+    #back{
+        font-size: 10px;
+    }
+
+    #submit_add_veggie {
+        width: 30%;
+        height: 100%;
+        font-size: 3vw;
+    }
+
+    table {
+        width: 99%;
+    }
+
+    th {
+        font-size: 22px;
+    }
+
+    td {
+        font-size: 22px;
+        text-align: left;
+        position: relative;
+    }
+
+    img{
+        width: 140px;
+        height: 125px;
+        object-fit: cover;
+    }
+
+    #contentautocomplete-list{
+    width:69%;
+    }
+
+    #recipe_name a {
+        font-size: 18px;
+        color: #00cc74;
+        text-decoration: underline;
+    }
+    #recipe_name p{
+        font-size: 13px;
+    }
+
+    #recipes_table{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
