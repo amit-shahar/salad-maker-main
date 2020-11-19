@@ -24,5 +24,3 @@ Future Updates:
 
 This is Amit Shahar’s and Itan Brill's first programming project.
 Please contact us for any questions or suggestions. 
-
-![Alt text](C:\Users\Gabi\PycharmProjects\pythonProject\salad-maker\main_pic.jpg?raw=true "Main")
