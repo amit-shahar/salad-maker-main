@@ -26,5 +26,6 @@ This is Amit Shahar’s and Itan Brill's first programming project.
 Please contact us for any questions or suggestions. 
 
 And here are some screenshots!
+![complete_pic](https://user-images.githubusercontent.com/71923695/99656544-af893380-2a65-11eb-8143-6d8183783a9b.jpg)
 ![main_pic](https://user-images.githubusercontent.com/71923695/99655969-004c5c80-2a65-11eb-96bc-af98d216efc7.jpg)
 ![recipes_pic](https://user-images.githubusercontent.com/71923695/99655977-017d8980-2a65-11eb-9577-1d3956bc1009.jpg)
